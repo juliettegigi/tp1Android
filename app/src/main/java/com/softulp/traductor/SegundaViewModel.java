@@ -14,7 +14,8 @@ import java.util.ArrayList;
 
 public class SegundaViewModel extends AndroidViewModel {
     private ArrayList<Palabra> list;
-private MutableLiveData<Palabra> mutablePalabra= new MutableLiveData<>();
+private MutableLiveData<Palabra> mutablePalabra;
+    private MutableLiveData<String> mutableTvError;
     public SegundaViewModel(@NonNull Application application) {
         super(application);
         listapalabra();
@@ -29,11 +30,25 @@ private MutableLiveData<Palabra> mutablePalabra= new MutableLiveData<>();
                 return;
             }
         }
-        mutablePalabra.setValue(null);
+        mutableTvError.setValue("La palabra no está en nuestro registro. \n(arbol,auto,computadora,pelota,tigre)");
     }
     public LiveData<Palabra> getMutablePalabra(){
+        if(mutablePalabra==null){
+            mutablePalabra=new MutableLiveData<>();
+        }
+
         return mutablePalabra;
     }
+
+
+    public MutableLiveData<String> getMutableTvError() {
+        if (mutableTvError == null) {
+            mutableTvError = new MutableLiveData<>();
+        }
+
+        return mutableTvError;
+    }
+
     private void listapalabra(){
         list= new ArrayList<>();
         list.add(new Palabra("Arbol", "Tree", R.drawable.arbol));

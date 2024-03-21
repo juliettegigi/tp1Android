@@ -43,14 +43,19 @@ smv.getMutablePalabra().observe(this, new Observer<Palabra>() {
             public void onChanged(Palabra palabra) {
 
                // binding.resultado.setText(palabra.getIngles());
-                if(palabra==null)
-                   binding.tvError.setText("Esa palabra no existe");
-                else {
+
                     binding.imageView.setImageResource(palabra.getImagen());
                     binding.resultado.setText(palabra.getIngles());
-                }
+
             }
         });
+        smv.getMutableTvError().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                binding.tvError.setText(s);
+            }
+        });
+
 smv.traducir(getIntent().getStringExtra("PalabraIngresada"));
 
     }
